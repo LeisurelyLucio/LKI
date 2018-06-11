@@ -1,7 +1,27 @@
+/**
+* @文件名：G_3DView.cpp
+* @简要描述：包含G_3DView类的实现，功能为投影变换以及坐标系、坐标点的绘制
+*
+* @版本信息： 1.1
+* @作者： Lucio
+* @邮箱： Wangyang3434@gmail.com
+* @日期：2018/5/10
+* @修改者：Lucio
+* @更新日期：2018/6/9
+*
+*/
+
 #include "stdafx.h"
 #include "G_3DView.h"
 
-
+/**
+* 功能：构造类，并初始化类成员
+* 参数及返回值说明：无
+*
+* 作者：Lucio
+* 日期：2018/6/9
+* 版本信息： 1.1
+*/
 G_3DView::G_3DView()
 {
 	slant = PI / 4;
@@ -20,6 +40,14 @@ G_3DView::~G_3DView()
 
 }
 
+/**
+* 功能：将颜色值转化为三维坐标，储存在类成员x y z中
+* 参数说明：COLORREF color：参与绘制的点对应的颜色值
+*
+* 作者：Lucio
+* 日期：2018/5/30
+* 版本信息： 1.1
+*/
 void G_3DView::setPosition(COLORREF color)
 {
 	x = GetRValue(color);
@@ -27,6 +55,14 @@ void G_3DView::setPosition(COLORREF color)
 	z = GetBValue(color);
 }
 
+/**
+* 功能：将颜色值对应的坐标绘制在三维系中
+* 参数说明：CDC *pDC：绘制区域句柄； COLORREF color：绘制点的颜色值
+*
+* 作者：Lucio
+* 日期：2018/6/9
+* 版本信息： 1.1
+*/
 void G_3DView::setPixel(CDC *pDC, COLORREF color)
 {
 	Transform3Dto2D(x, y, z);
@@ -44,12 +80,29 @@ void G_3DView::setPixel(CDC *pDC, COLORREF color)
 	brush.DeleteObject();
 }
 
+/**
+* 功能：将三维坐标投影到RG平面上，斜二测投影方式
+* 参数及返回值说明：
+* float &x：传入三维坐标表示的x坐标并输出投影后的x坐标； float &y：类似x； float z：传入z坐标
+*
+* 作者：Lucio
+* 日期：2018/6/9
+* 版本信息： 1.1
+*/
 void G_3DView::Transform3Dto2D(float &x, float &y, float z)
 {
 	x = x - (z * cos(slant)) / 2;
 	y = y - (z * sin(slant)) / 2;
 }
 
+/**
+* 功能：绘制三维坐标系的坐标轴
+* 参数说明：CDC * pDC：绘制区域句柄
+*
+* 作者：Lucio
+* 日期：2018/6/9
+* 版本信息： 1.1
+*/
 void G_3DView::drawCoordinateSystem3D(CDC * pDC)
 {
 	float x, y, z;

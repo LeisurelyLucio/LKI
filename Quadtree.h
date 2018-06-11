@@ -1,3 +1,15 @@
+/**
+* @文件名：Quadtree.h
+* @简要描述：包含Quadtree类，功能为利用四叉树进行绘制平面上的点对应位置的颜色集查询
+*
+* @版本信息： 1.1
+* @作者： Lucio
+* @邮箱： Wangyang3434@gmail.com
+* @日期：2018/5/10
+* @修改者：Lucio
+* @更新日期：2018/6/10
+*/
+
 #pragma once
 #include <vector>
 
