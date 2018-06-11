@@ -93,7 +93,7 @@ void G_3DView::drawCoordinateSystem3D(CDC * pDC)
 	// -------------------- 绘制文字 -------------------------
 
 	// 绘制x轴的R
-	pDC->TextOutW(O_x + scale * (255+1), O_y - scale * (14), CString("R"));
+	pDC->TextOutW(O_x + scale * (255-1), O_y - scale * (14), CString("R"));
 	// 绘制y轴的G
 	pDC->TextOutW(O_x + scale * (3), O_y - scale * (255 + 4), CString("G"));
 	// 绘制z轴的B
